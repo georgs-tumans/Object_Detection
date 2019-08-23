@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import sys
 
-#Lai palaistu programmu - python Image.py/ .\haarcascade_frontalface_alt.xml
+#Lai palaistu programmu - python Image.py/ .\Classifiers\haarcascade_frontalface_alt.xml
 
 # Read image from your local file system
 original_image = cv2.imread('.\Images\img4.jpg')
@@ -11,7 +11,8 @@ original_image = cv2.imread('.\Images\img4.jpg')
 grayscale_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
 
 cascPath = sys.argv[1]  #pasaka, ka vērtība mainīgajam tiks ņemta no komandrindā padota argumenta
-faceCascade = cv2.CascadeClassifier(cascPath)
+#faceCascade = cv2.CascadeClassifier(cascPath)
+faceCascade = cv2.CascadeClassifier('.\Classifiers\haarcascade_frontalface_alt.xml') #other cascade
 detected_faces = faceCascade.detectMultiScale(
         grayscale_image,
         scaleFactor=1.1,
