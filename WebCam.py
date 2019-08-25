@@ -9,7 +9,7 @@ webcam = cv2.VideoCapture(0) #noklusētā videokamera - 0, telefons caur droid c
 
 cascPath = sys.argv[1]  #pasaka, ka vērtība mainīgajam tiks ņemta no komandrindā padota argumenta
 #faceCascade = cv2.CascadeClassifier(cascPath) #haar face detection cascade
-faceCascade = cv2.CascadeClassifier('.\Classifiers\haarcascade_frontalface_alt.xml') #lbp face detection cascade
+faceCascade = cv2.CascadeClassifier('.\Classifiers\haarcascade_frontalface_alt.xml') 
 eyeCascade = cv2.CascadeClassifier('.\Classifiers\haarcascade_eye_tree_eyeglasses.xml')
 
 while(True):
@@ -34,7 +34,7 @@ while(True):
         #Tālāk pievienota acu atpazīšana
         eyes = eyeCascade.detectMultiScale(
             square, #acis meklējam tikai atrastās sejas laukumā
-            scaleFactor=1.1,
+            scaleFactor=1.05,
             minNeighbors=4,
             minSize=(10, 10),
             flags=cv2.CASCADE_SCALE_IMAGE
