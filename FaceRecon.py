@@ -140,6 +140,8 @@ def predict(test_img):
 #data will be in two lists of same size
 #one list will contain all the faces
 #and the other list will contain respective labels for each face
+
+#izņemts ārā, jo vajadzīgs tikai trenējot modeli
 print("Preparing data...")
 faces, labels = prepare_training_data(training_data_set)
 print("Data prepared")
@@ -157,12 +159,14 @@ face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 #face_recognizer = cv2.face.createFisherFaceRecognizer()
 
 #train our face recognizer of our training faces
-face_recognizer.train(faces, np.array(labels))
+#face_recognizer.train(faces, np.array(labels))
+face_recognizer.read("Model.xml")
+#face_recognizer.write("Model.xml")
 
 print("Predicting images...")
 
 #load test images
-test_img1 = cv2.imread('./FaceTrainingTestImg/me.jpg')
+test_img1 = cv2.imread('./FaceTrainingTestImg/myface.jpg')
 test_img2 = cv2.imread("./FaceTrainingTestImg/trump.jpg")
 
 #perform a prediction
