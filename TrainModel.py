@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 
-#Programmiņa, kas trenē modeli atpazīt manu seju
+#This program loads an existing face recognizer model and updates it (trains it further)
 
 trainingData='.\FaceTraining\s1'  #trainingā izmantojamo bilžu mapes lokācija
 
@@ -45,7 +45,7 @@ def prepareData(directory):
             face, rect = detect_face(image)
             if face is not None:
                 faces.append(face)
-                labels.append('0')
+                labels.append(0)
     
     return faces, labels
 
@@ -53,6 +53,8 @@ print("Preparing data...")
 faces, labels = prepareData(trainingData)
 print("Data prepared")
 
-face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-face_recognizer.train(faces, np.array(labels))
+face_recognizer= cv2.face.LBPHFaceRecognizer_create()
+face_recognizer.read("MyFaceModel.xml")
+face_recognizer.update(faces, np.array(labels))
 face_recognizer.write("MyFaceModel.xml")
+print ('Model updated, exiting now')

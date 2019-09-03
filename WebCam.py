@@ -2,14 +2,12 @@ import numpy as np
 import cv2
 import sys
 
-#Lai palaistu programmu - python WebCam.py/ .\Classifiers\haarcascade_frontalface_alt.xml
+#Program that detects faces and eyes in video stream from the pc web cam and displays the stream
 
-webcam = cv2.VideoCapture(0) #noklusētā videokamera - 0, telefons caur droid cam - 1
-#webcam = cv2.VideoCapture("https://192.168.8.107:8080/video") #šis ņem konkrētā ip adresē strīmotu video (šajā gadījumā izmantojam telefonu)
+webcam = cv2.VideoCapture(0) #the default webcam - 0, phone connected as web cam or whatever other cam - 1
+#webcam = cv2.VideoCapture("https://192.168.8.107:8080/video") #video stream from an IP web cam
 
-cascPath = sys.argv[1]  #pasaka, ka vērtība mainīgajam tiks ņemta no komandrindā padota argumenta
-#faceCascade = cv2.CascadeClassifier(cascPath) #haar face detection cascade
-faceCascade = cv2.CascadeClassifier('.\Classifiers\haarcascade_frontalface_alt.xml') 
+faceCascade = cv2.CascadeClassifier('.\Classifiers\haarcascade_frontalface_alt.xml')  #can test other classifiers too
 eyeCascade = cv2.CascadeClassifier('.\Classifiers\haarcascade_eye_tree_eyeglasses.xml')
 
 while(True):
@@ -31,9 +29,9 @@ while(True):
         square = cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
         cv2.putText(square, 'Face', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (100,255,100), 2)
         
-        #Tālāk pievienota acu atpazīšana
+        #Eye detection within the detected face area
         eyes = eyeCascade.detectMultiScale(
-            square, #acis meklējam tikai atrastās sejas laukumā
+            square, 
             scaleFactor=1.05,
             minNeighbors=4,
             minSize=(10, 10),
