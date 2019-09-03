@@ -3,8 +3,11 @@ import os
 import numpy as np
 
 #This program loads an existing face recognizer model and updates it (trains it further)
+#Seems like training images have to be really small in size, otherwise it is very likely to crash with '-4 insufficient memory'
 
-trainingData='.\FaceTraining\s1'  #trainingā izmantojamo bilžu mapes lokācija
+trainingData='.\FaceTraining\s1'  #Location of the images for model training
+noFaces=0
+usedFaces=0
 
 def detect_face(img):
     #convert the test image to gray scale as opencv face detector expects gray images
@@ -46,12 +49,20 @@ def prepareData(directory):
             if face is not None:
                 faces.append(face)
                 labels.append(0)
-    
+                global usedFaces
+                usedFaces=usedFaces+1
+            else:
+                 global noFaces
+                 noFaces=noFaces+1
+            
     return faces, labels
 
 print("Preparing data...")
 faces, labels = prepareData(trainingData)
 print("Data prepared")
+if noFaces>0:
+    print ('No faces were found in ' + str(noFaces) + ' images')
+print (str(usedFaces)+' images were used to train the model')
 
 face_recognizer= cv2.face.LBPHFaceRecognizer_create()
 face_recognizer.read("MyFaceModel.xml")
