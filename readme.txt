@@ -1,6 +1,5 @@
-Testa projekts, kura meginu izmanot openCV ar python, lai ieks video (velams reala web kameras strima) atpazitu sejas.
+Test project for testing OpenCV face detection/recognition features with Python. Inlcudes files (seperate little apps) for updating (trining)
+face recognition model as well as testing face detection from images and various live video streams.
 
-Lai stradatu, jainstale sakuma opencv prieks python (pip install opencv-contrib-python)
+The OpenCV library with extra modules for python must be installed first (pip install opencv-contrib-python)
 
-Lai palaistu sejas atpazisanuy, iespehams jalaiz ar python 2 - py -2 FaceRecon
-(Ieprieks jainstale python 2 uz datora un open cv contrib prieks python2: py -2.7 -m pip install opencv-contrib-python)
